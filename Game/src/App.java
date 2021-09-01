@@ -6,7 +6,8 @@ public class App {
 
         Alvo[] alvos = new Alvo[15];
         criarAlvos(alvos);
-        // atirar(alvos);
+        verificarProsicao(alvos);
+        /* atirar(alvos); */
         for (int i = 0; i < alvos.length; i++) {
             System.out.print(alvos[i].toString() + "\n");
         }
@@ -18,31 +19,35 @@ public class App {
         for (int i = 0; i < alvos.length; i++) {
             int x = random.nextInt(5) + 1;
             int y = random.nextInt(5) + 1;
-            alvos[i] = new Alvo(x, y, 'B');
-            while (verificarProsicao(alvos, x, y)) {
-                x = random.nextInt(5) + 1;
-                y = random.nextInt(5) + 1;
-                alvos[i].setPosx(x);
-                alvos[i].setPosy(y);
+            if (i == 14 || i == 13 || i == 12) {
+                alvos[i] = new Alvo(x, y, 'P');
+            } else {
+                alvos[i] = new Alvo(x, y, 'B');
             }
 
         }
     }
 
-    private static void atirar(Alvo[] alvos) {
+    /*
+     * private static void atirar(Alvo[] alvos) {
+     * 
+     * }
+     */
 
-    }
-
-    private static boolean verificarProsicao(Alvo[] alvos, int x, int y) {
-        for (int i = 0; i < alvos.length; i++) {
-            if (alvos[i] == null) {
-                return true;
-            } else if (alvos[i].getPosx() == x && alvos[i].getPosy() == y) {
-                return false;
+    private static void verificarProsicao(Alvo[] alvos) {
+        Random random = new Random();
+        int cont = alvos.length;
+        while (cont != 0) {
+            for (int i = 0; i < alvos.length; i++) {
+                if (alvos[cont].getPosx() == alvos[i].getPosx() && alvos[cont].getPosy() == alvos[i].getPosy()) {
+                    int x = random.nextInt(5) + 1;
+                    int y = random.nextInt(5) + 1;
+                    alvos[i].setPosx(x);
+                    alvos[i].setPosy(y);
+                }
             }
+            cont--;
         }
-
-        return true;
     }
 
 }
