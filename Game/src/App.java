@@ -1,53 +1,46 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Alvo[] alvos = new Alvo[15];
+        ArrayList<Alvo> alvos = new ArrayList<Alvo>(15);
         criarAlvos(alvos);
-        verificarProsicao(alvos);
-        /* atirar(alvos); */
-        for (int i = 0; i < alvos.length; i++) {
-            System.out.print(alvos[i].toString() + "\n");
+        for (Alvo alvo : alvos) {
+            System.out.println(alvo.toString());
         }
-
     }
 
-    private static void criarAlvos(Alvo[] alvos) {
+    private static void criarAlvos(ArrayList<Alvo> alvos) {
         Random random = new Random();
-        for (int i = 0; i < alvos.length; i++) {
+        Alvo alvo;
+        int cont = 15;
+        while (cont != 0) {
             int x = random.nextInt(5) + 1;
             int y = random.nextInt(5) + 1;
-            if (i == 14 || i == 13 || i == 12) {
-                alvos[i] = new Alvo(x, y, 'P');
-            } else {
-                alvos[i] = new Alvo(x, y, 'B');
-            }
+            if (verificarPosicoes(x, y, alvos)) {
+                if (cont > 3) {
+                    alvo = new Alvo(x, y, 'B');
+                    alvos.add(alvo);
+                    cont--;
+                } else {
+                    alvo = new Alvo(x, y, 'P');
+                    alvos.add(alvo);
+                    cont--;
+                }
 
+            }
         }
     }
 
-    /*
-     * private static void atirar(Alvo[] alvos) {
-     * 
-     * }
-     */
-
-    private static void verificarProsicao(Alvo[] alvos) {
-        Random random = new Random();
-        int cont = alvos.length;
-        while (cont != 0) {
-            for (int i = 0; i < alvos.length; i++) {
-                if (alvos[cont].getPosx() == alvos[i].getPosx() && alvos[cont].getPosy() == alvos[i].getPosy()) {
-                    int x = random.nextInt(5) + 1;
-                    int y = random.nextInt(5) + 1;
-                    alvos[i].setPosx(x);
-                    alvos[i].setPosy(y);
-                }
+    private static boolean verificarPosicoes(int x, int y, ArrayList<Alvo> alvos) {
+        for (Alvo alvo : alvos) {
+            if (alvo.getPosx() == x && alvo.getPosy() == y) {
+                return false;
             }
-            cont--;
         }
+        return true;
     }
 
 }
