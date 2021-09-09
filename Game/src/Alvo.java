@@ -104,7 +104,7 @@ public class Alvo {
     }
     
     // Metodo Atira, aqui e verificado se as posicoes passadas pelo jogador
-    //no eixo x e y conferem com as possicoes do alvo, se as posicoes forem iguais, o
+    //no eixo x e y conferem com as possicoes do alvo, se as posicoes forem iguais e o alvo for Branco o
     // jogador ganha uma vida, caso contrario ele perde 
 
     public char Atira(int posicaoX, int posicaoY) {
