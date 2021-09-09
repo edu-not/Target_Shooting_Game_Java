@@ -87,48 +87,43 @@ public class App {
             int tiroY = scan.nextInt();
 
             if (!pesquisaAlvo(tiroX, tiroY, alvos)) {
+                System.err.println("\nErrou!\n");
                 qtdTiros--;
-                System.out.println("Errou");
+                exibirAlvos(alvos);
+                System.out.println("\n\tQuantidade de alvos restante: " + alvos.size());
+                System.out.println("\tQuantidade de tiros restante: " + qtdTiros);
+                System.out.println("\tQuantidade de vidas restante: " + Alvo.getVida());
             } else {
                 int posicaoAlvoAcertado = retornaPosicaoAlvo(tiroX, tiroY, alvos);
                 Alvo aux = alvos.get(posicaoAlvoAcertado);
                 if (aux.Atira(tiroX, tiroY) == 'P') {
 
                     System.err.println("\nAcertou um alvo preto!!!\n");
+                    int x, y;
 
-                    int x = random.nextInt(5) + 1;
-                    int y = random.nextInt(5) + 1;
-                    while (verificarPosicoes(x, y, alvos)) {
+                    do {
                         x = random.nextInt(5) + 1;
                         y = random.nextInt(5) + 1;
-                    }
+                    } while (!verificarPosicoes(x, y, alvos));
 
                     Alvo novoAlvo = new Alvo(x, y, 'P');
                     alvos.set(posicaoAlvoAcertado, novoAlvo);
                     qtdTiros--;
                     exibirAlvos(alvos);
-                    System.out.println("\n\tQuatidade de alvos restante: " + alvos.size());
-                    System.out.println("\tQuatidade de tiros restante: " + qtdTiros);
-                    System.out.println("\tQuatidade de vidas restante: " + Alvo.getVida());
+                    System.out.println("\n\tQuantidade de alvos restante: " + alvos.size());
+                    System.out.println("\tQuantidade de tiros restante: " + qtdTiros);
+                    System.out.println("\tQuantidade de vidas restante: " + Alvo.getVida());
 
                 } else if (aux.Atira(tiroX, tiroY) == 'B') {
                     System.err.println("\nAcertou um alvo branco\n");
                     alvos.remove(posicaoAlvoAcertado);
                     qtdTiros--;
                     exibirAlvos(alvos);
-                    System.out.println("\n\tQuatidade de alvos restante: " + alvos.size());
-                    System.out.println("\tQuatidade de tiros restante: " + qtdTiros);
-                    System.out.println("\tQuatidade de vidas restante: " + Alvo.getVida());
-                } else if (aux.Atira(tiroX, tiroY) == 'N') {
-                    System.err.println("\nErrou!\n");
-                    qtdTiros--;
-                    exibirAlvos(alvos);
-                    System.out.println("\n\tQuatidade de alvos restante: " + alvos.size());
-                    System.out.println("\tQuatidade de tiros restante: " + qtdTiros);
-                    System.out.println("\tQuatidade de vidas restante: " + Alvo.getVida());
+                    System.out.println("\n\tQuantidade de alvos restante: " + alvos.size());
+                    System.out.println("\tQuantidade de tiros restante: " + qtdTiros);
+                    System.out.println("\tQuantidade de vidas restante: " + Alvo.getVida());
                 }
             }
-
         }
 
         if (qtdTiros == 0) {
