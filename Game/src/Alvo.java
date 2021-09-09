@@ -62,16 +62,19 @@ public class Alvo {
 
 public class Alvo {
 
+    // Atributos do objeto Alvo 
     private static int vida = 3;
     private int posx, posy;
     private char cor;
 
+    //Metodo Construtor
     public Alvo(int posx, int posy, char cor) {
         this.posx = posx;
         this.posy = posy;
         this.cor = cor;
     }
 
+    // Metodos GET SET 
     public static int getVida() {
         return vida;
     }
@@ -99,6 +102,10 @@ public class Alvo {
     public void setCor(char cor) {
         this.cor = cor;
     }
+    
+    // Metodo Atira, aqui e verificado se as posicoes passadas pelo jogador
+    //no eixo x e y conferem com as possicoes do alvo, se as posicoes forem iguais, o
+    // jogador ganha uma vida, caso contrario ele perde 
 
     public char Atira(int posicaoX, int posicaoY) {
         if (posicaoX == this.posx && posicaoY == this.posy) {
