@@ -5,6 +5,7 @@ import java.util.Random;
 public class App {
     public static void main(String[] args) throws Exception {
 
+        //Instanciado um arraylist do objeto alvos, contendo 15 alvos
         ArrayList<Alvo> alvos = new ArrayList<Alvo>(15);
 
         criarAlvos(alvos);
@@ -15,6 +16,9 @@ public class App {
 
     }
 
+    //metodo estatico para criar os alvos, utilizamos o random para criar numeros aleatorios
+    //para as cordenadas dos alvos, chamamos o metodo verificaposicoes, pois nao queremos
+    //alvos iguais 
     private static void criarAlvos(ArrayList<Alvo> alvos) {
         Random random = new Random();
         Alvo alvo;
@@ -46,6 +50,8 @@ public class App {
         return true;
     }
 
+     //metodo estatico para verificar se o tiro do jogador coincide com o alvo, 
+    //caso verdadeiro retorna true 
     private static boolean pesquisaAlvo(int x, int y, ArrayList<Alvo> alvos) {
         for (Alvo alvo : alvos) {
             if (alvo.getPosx() == x && alvo.getPosy() == y) {
@@ -55,6 +61,7 @@ public class App {
         return false;
     }
 
+    //metodo estatico que retorna qual a posicao do alvo que o jogador acertou 
     private static int retornaPosicaoAlvo(int x, int y, ArrayList<Alvo> alvos) {
         for (Alvo alvo : alvos) {
             if (alvo.getPosx() == x && alvo.getPosy() == y) {
@@ -64,6 +71,7 @@ public class App {
         return -1;
     }
 
+    //metodo estatico para mostrar a posicao do eixo X e eixo Y dos alvos 
     private static void exibirAlvos(ArrayList<Alvo> alvos) {
         String aux = "";
         for (Alvo alvo : alvos) {
@@ -72,6 +80,9 @@ public class App {
         System.out.println(aux);
     }
 
+    //Neste metodo de fato inicia a partida, e solicitado ao jogador que informe os eixos
+    // X e Y dos seus tiros, caso as insformacoes do tiro seja diferente dos alvos o jogador
+    // perde um tiro  
     private static void start(ArrayList<Alvo> alvos) {
 
         Random random = new Random();
@@ -86,6 +97,7 @@ public class App {
             System.out.print("Insira a posicao 'Y' dos eu tiro(1-5): ");
             int tiroY = scan.nextInt();
 
+            // verificado se o jogador acertou o alvo
             if (!pesquisaAlvo(tiroX, tiroY, alvos)) {
                 System.err.println("\nErrou!\n");
                 qtdTiros--;
